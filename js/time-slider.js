@@ -16,7 +16,7 @@ var svg = d3.select("#slider")
 svg.append("rect")
     .attr("width", "100%")
     .attr("height", "100%")
-    .attr("fill", "white");
+    .attr("fill", "black");
 
 var x = d3.scaleTime()
     .domain([startDate, endDate])
