@@ -13,6 +13,10 @@ var svg = d3.select("#slider")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + 50);
 
+svg.append("rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr("fill", "pink");
 var x = d3.scaleTime()
     .domain([startDate, endDate])
     .range([0, width])
