@@ -14,13 +14,13 @@ var svg = d3.select("#slider")
     .attr("height", height + 50);
 
 svg.append("rect")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("fill", "black");
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height)
+    .attr("fill", "white");
 
 var x = d3.scaleTime()
     .domain([startDate, endDate])
-    .range([0, width])
+    .range([0, width, 1000 * 60 * 60 * 24])
     .clamp(true);
 
 var slider = svg.append("g")
