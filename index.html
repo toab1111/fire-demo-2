@@ -218,11 +218,12 @@
     <script type="text/javascript" src="TimeDimension/leaflet.timedimension.control.js"></script>
 
     <script>
-        let openstreetmap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        var openstreetmap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             maxZoom: 18,
             tileSize: 512,
-            zoomOffset: -1
+            zoomOffset: -1,
+            crs: L.CRS.EPSG4326
 
         })
 
@@ -232,27 +233,31 @@
             mapLinkAttr = '&copy; ' + mapLink + ', ' + wholink;
 
         var Satellite = L.tileLayer(mapLinkUrl, {
-            attribution: mapLinkAttr
+            attribution: mapLinkAttr,
+            crs: L.CRS.EPSG4326
         });
 
         var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
             maxZoom: 20,
-            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+            crs: L.CRS.EPSG4326
         });
 
         var googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
             maxZoom: 20,
-            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+            crs: L.CRS.EPSG4326
         });
 
-        googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+        var googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
             maxZoom: 20,
-            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+            crs: L.CRS.EPSG4326
         });
 
 
         var testWMS = "https://ogcie.iblsoft.com/metocean/wms"
-        L.tileLayer.wms(testWMS, {
+        var testWMS_tile = L.tileLayer.wms(testWMS, {
             layers: 'foreground-lines',
             format: 'image/png',
             transparent: true,
@@ -264,8 +269,8 @@
             format: 'image/png',
             transparent: true,
             opacity: 0.3,
-            crs: L.CRS.EPSG4326,
-            attribution: 'OGC MetOcean DWG Best Practice Example, IBL Software Engineering'
+            attribution: 'OGC MetOcean DWG Best Practice Example, IBL Software Engineering',
+            crs: L.CRS.EPSG4326
         });
 
         var mymap = L.map('mapid', {
