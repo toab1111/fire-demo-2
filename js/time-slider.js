@@ -1,9 +1,9 @@
 var formatDate = d3.timeFormat("%d %b %Y ");
 var formatDate_d = d3.timeFormat("| %d %b %Y");
 var width_window = window.innerWidth
-var startDate = new Date(2018, 11, 1),
-    endDate = new Date(2018, 11, 7);
-
+var endDate = new Date(),
+    startDate = new Date(endDate);
+startDate.setDate(startDate.getDate() - 8);
 var margin = { top: 0, right: 100, bottom: 0, left: 50 },
     width = (width_window - margin.left - margin.right) / 1.05,
     height = 100 - margin.top - margin.bottom;
@@ -20,7 +20,7 @@ svg.append("rect")
 
 var x = d3.scaleTime()
     .domain([startDate, endDate])
-    .range([0, width, 1000 * 60 * 60 * 24])
+    .range([0, width])
     .clamp(true);
 
 var slider = svg.append("g")
@@ -43,7 +43,7 @@ slider.insert("g", ".track-overlay")
     .attr("class", "ticks")
     .attr("transform", "translate(40," + 1 + ")")
     .selectAll("text")
-    .data(x.ticks(7))
+    .data(x.ticks(8))
     .enter()
     .append("text")
     .attr("x", x)
